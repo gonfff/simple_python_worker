@@ -1,13 +1,20 @@
-FROM python:3.6-alpine
+FROM python:3.8-alpine
 
-COPY pip/pip.conf /etc/pip.conf
-COPY pip/nexus.pem /etc/nexus.pem
+COPY requirements.txt /app/requirements.txt
 
-COPY ./ /app/
-RUN apk update && apk add --no-cache postgresql-libs &&  \
- apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev libressl-dev libffi-dev make && \
- pip install -r /app/requirements.txt --no-cache-dir && \
- apk --purge del .build-deps
+RUN apk update && apk add --no-cache postgresql-libs && \
+    apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev && \
+    pip install -r /app/requirements.txt --no-cache-dir && \
+    apk --purge del .build-deps
+COPY ./ /app
 RUN pip install -e /app
+RUN apk add bash
+CMD simple_worker
 
-ENTRYPOINT lti_octopoda
+
+### test env
+#ENV DATABASE_NAME simple_database
+#ENV DATABASE_USERNAME postgres
+#ENV DATABASE_PASSWORD postgres
+#ENV DATABASE_HOST host.docker.internal
+#ENV DATABASE_PORT 5432

@@ -7,12 +7,14 @@ setup(
     author='dementevda',
     url='',
     packages=find_packages('src'),
+    package_dir={
+        '': 'src'},
     include_package_data=True,
     keywords=[
         'test, rabbitmq, worker'
     ],
     entry_points={
         'console_scripts': [
-            'worker = worker:main']},
+            'simple_worker = worker:main']},
 )
 
