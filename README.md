@@ -5,4 +5,4 @@ Async. Take user data from rabbit queue and insert this data to simple_database
 1) Secrets from env
 2) Dockerizing
 3) Improve logging
-4) mb features??
+4) mb features?? mb return idea with aiohttp
