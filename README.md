@@ -1,5 +1,5 @@
 # Simple python worker
-Async. Take user data from rabbit queue and insert this data to simple_database
+For awesome_project. In progres. Async. Take user data from rabbit queue and insert this data to simple_database
 
 ##### TODO
 1) Secrets from env
